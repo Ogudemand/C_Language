@@ -1,0 +1,3 @@
+﻿  Sourcec.cpp
+C:\Users\Administrator\Desktop\C_Language\Class1th\Sourcec.cpp(4,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  Class1th.vcxproj -> C:\Users\Administrator\Desktop\C_Language\Program\x64\Debug\Class1th.exe
