@@ -19,9 +19,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Class6th", "..\Class6th\Cla
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Class7th", "..\Class7th\Class7th.vcxproj", "{7026ACC0-F03A-43A5-8612-DA212CA22A7D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Class(8)th", "..\Class(8)th\Class(8)th.vcxproj", "{701984B4-825C-40B8-B65D-2550C7853E8D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Class8th", "..\Class(8)th\Class(8)th.vcxproj", "{701984B4-825C-40B8-B65D-2550C7853E8D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Class9th", "..\Class9th\Class9th.vcxproj", "{EE37AA0D-D831-43B9-B1BA-1BD46C552084}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Class10th", "..\Class10th\Class10th.vcxproj", "{B4DE7532-95D3-49EA-BE9C-56045835A47A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -193,6 +195,22 @@ Global
 		{EE37AA0D-D831-43B9-B1BA-1BD46C552084}.Release|x64.Build.0 = Release|x64
 		{EE37AA0D-D831-43B9-B1BA-1BD46C552084}.Release|x86.ActiveCfg = Release|Win32
 		{EE37AA0D-D831-43B9-B1BA-1BD46C552084}.Release|x86.Build.0 = Release|Win32
+		{B4DE7532-95D3-49EA-BE9C-56045835A47A}.Debug|ARM.ActiveCfg = Debug|x64
+		{B4DE7532-95D3-49EA-BE9C-56045835A47A}.Debug|ARM.Build.0 = Debug|x64
+		{B4DE7532-95D3-49EA-BE9C-56045835A47A}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{B4DE7532-95D3-49EA-BE9C-56045835A47A}.Debug|ARM64.Build.0 = Debug|ARM64
+		{B4DE7532-95D3-49EA-BE9C-56045835A47A}.Debug|x64.ActiveCfg = Debug|x64
+		{B4DE7532-95D3-49EA-BE9C-56045835A47A}.Debug|x64.Build.0 = Debug|x64
+		{B4DE7532-95D3-49EA-BE9C-56045835A47A}.Debug|x86.ActiveCfg = Debug|Win32
+		{B4DE7532-95D3-49EA-BE9C-56045835A47A}.Debug|x86.Build.0 = Debug|Win32
+		{B4DE7532-95D3-49EA-BE9C-56045835A47A}.Release|ARM.ActiveCfg = Release|x64
+		{B4DE7532-95D3-49EA-BE9C-56045835A47A}.Release|ARM.Build.0 = Release|x64
+		{B4DE7532-95D3-49EA-BE9C-56045835A47A}.Release|ARM64.ActiveCfg = Release|ARM64
+		{B4DE7532-95D3-49EA-BE9C-56045835A47A}.Release|ARM64.Build.0 = Release|ARM64
+		{B4DE7532-95D3-49EA-BE9C-56045835A47A}.Release|x64.ActiveCfg = Release|x64
+		{B4DE7532-95D3-49EA-BE9C-56045835A47A}.Release|x64.Build.0 = Release|x64
+		{B4DE7532-95D3-49EA-BE9C-56045835A47A}.Release|x86.ActiveCfg = Release|Win32
+		{B4DE7532-95D3-49EA-BE9C-56045835A47A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
