@@ -1,70 +1,128 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <conio.h>
 #include <string.h>
+#include <windows.h>
 
 
+
+#define UP 72
+#define DOWN 80
+#define LEFT 75
+#define RIGHT 77
 
 #define WIDTH 11
 #define HEIGHT 11
 
+
+
 char maze[WIDTH][HEIGHT];
+
+typedef struct Player 
+{
+	int x;
+	int y;
+	const char* shape;
+} Player;
+
+
+
 
 void CreateMaze()
 {
 	// 0 : ºó °ø°£ (" ")
 	// 1 : º® (¤±)
-	// 2 : Å»Ãâ±¸ (*)
+	// 2 : Å»Ãâ±¸ (0)
 
 	strcpy(maze[0], "1111111111");
-	strcpy(maze[1], "1100111101");
+	strcpy(maze[1], "1100011101");
 	strcpy(maze[2], "1110111001");
 	strcpy(maze[3], "1110011011");
 	strcpy(maze[4], "1111010011");
 	strcpy(maze[5], "1100000111");
-	strcpy(maze[6], "1101111111");
+	strcpy(maze[6], "1101101111");
 	strcpy(maze[7], "1100000111");
 	strcpy(maze[8], "1110011111");
 	strcpy(maze[9], "1111011111");
 	strcpy(maze[10],"1111111111");
+
 }
 
-void Render()
+void gotoxy(int x, int y) 
 {
-		for (int y = 0; y < HEIGHT; y++) 
+	COORD pos = { x, y };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+}
+
+
+
+
+void Render(char map[WIDTH][HEIGHT], Player* player)
+{
+	system("cls");
+	for (int i = 0; i < HEIGHT; i++)
+	{
+		for (int j = 0; j < WIDTH; j++)
 		{
-			for (int x = 0; x < WIDTH; x++) 
+			if (j == player->x && i == player->y) 
 			{
-				char cell = maze[y][x];
-				if (cell == '1') 
-				{
-					printf("¡á"); 
-				}
-				else if (cell == '0') 
-				{
-					printf(" ");
-				}
+				printf("%s", player->shape); 
 			}
-			printf("\n");
+			else {
+				printf("%c", map[i][j] == '1' ? '#' : ' '); 
+			}
 		}
+		printf("\n");
+	}
 }
 
+	
 
 
-typedef struct Student
+void Keyboard(Player* player)
 {
-	char name[10];
-}Student;
+	if (_kbhit())
+	{
+		char key = _getch();
 
-int main()
-{
-		CreateMaze(); 
-		Render();     
+		if (key == -32 || key == 0) 
+		{
+			key = _getch();
+		}
 
-return 0;
+		int newX = player->x, newY = player->y;
+
+		switch (key)
+		{
+		case UP: newY--; break;
+		case DOWN: newY++; break;
+		case LEFT: newX--; break;
+		case RIGHT: newX++; break;
+		}
+
+		if (maze[newY][newX] == '0')
+		{
+			player->x = newX;
+			player->y = newY;
+		}
+	}
 }
 
+int main() 
+{
+	Player player = { 4, 1, "P" };
 
+	CreateMaze();
 
+	while (1)
+	{
+		Render(maze, &player); 
+		Keyboard(&player);
+		Sleep(100);
+	}
+
+	return 0;
+}
 
 
 
