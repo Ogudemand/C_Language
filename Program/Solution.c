@@ -1,153 +1,92 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <conio.h>
-#include <string.h>
 #include <windows.h>
 
-
-
 #define UP 72
-#define DOWN 80
 #define LEFT 75
 #define RIGHT 77
+#define DOWN 80
 
-#define WIDTH 11
-#define HEIGHT 11
+// 버퍼의 크기
+int width = 100;
+int height = 60;
 
 
+// 버퍼를 생성합니다.
+HANDLE screen[2];
+// screen[0] front buffer
+// screen[1] back buffer
 
-char maze[WIDTH][HEIGHT];
+// HANDLE 인텍스에 접근해서 버퍼를 교체시키는 변수
+int screeIndex = 0;
 
-typedef struct Player 
+void GotoXY(int x, int y)
 {
-	int x;
-	int y;
-	const char* shape;
-} Player;
+    // x, y 좌표 설정
+    COORD position = { (SHORT)x, (SHORT)y };
 
+    // 커서 이동 함수
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);
+}
 
+// 버퍼를 초기화하는 함수
 
-
-void CreateMaze()
+void ScreenInit()
 {
-	// 0 : 빈 공간 (" ")
-	// 1 : 벽 (ㅁ)
-	// 2 : 탈출구 (0)
+    // 버퍼의 가로 사이즈, 세로 사이즈
+    COORD size = { width, height };
 
-	strcpy(maze[0], "1111111111");
-	strcpy(maze[1], "1100011101");
-	strcpy(maze[2], "1110111001");
-	strcpy(maze[3], "1110011011");
-	strcpy(maze[4], "1111010011");
-	strcpy(maze[5], "1100000111");
-	strcpy(maze[6], "1101101111");
-	strcpy(maze[7], "1100000111");
-	strcpy(maze[8], "1110011111");
-	strcpy(maze[9], "1111011111");
-	strcpy(maze[10],"1111111111");
+    // left, top, right, bottom
+    SMALL_RECT rect = { 0, 0, width - 1, height - 1 };
+
+  
+    screen[0] = CreateConsoleScreenBuffer
+    (
+        GENERIC_READ | GENERIC_WRITE,
+        FILE_SHARE_READ | FILE_SHARE_WRITE,
+        NULL,
+        CONSOLE_TEXTMODE_BUFFER,
+        NULL
+    );
+
+    SetConsoleScreenBufferSize(screen[0], size);
+    SetConsoleWindowInfo(screen[0], TRUE, &rect);
+
+    screen[1] = CreateConsoleScreenBuffer
+    (
+        GENERIC_READ | GENERIC_WRITE,
+        FILE_SHARE_READ | FILE_SHARE_WRITE,
+        NULL,
+        CONSOLE_TEXTMODE_BUFFER,
+        NULL
+    );
+
+    SetConsoleScreenBufferSize(screen[1], size);
+    SetConsoleWindowInfo(screen[1], TRUE, &rect);
+
+
+    CONSOLE_CURSOR_INFO cursor;
+    cursor.bVisible = FALSE;
+    cursor.dwSize = 1;
+
+    SetConsoleCursorInfo(screen[0], &cursor);
+    SetConsoleCursorInfo(screen[1], &cursor);
 
 }
 
-void gotoxy(int x, int y) 
-{
-	COORD pos = { x, y };
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
-}
-
-
-
-
-void Render(char map[WIDTH][HEIGHT], Player* player)
-{
-	system("cls");
-	for (int i = 0; i < HEIGHT; i++)
-	{
-		for (int j = 0; j < WIDTH; j++)
-		{
-			if (j == player->x && i == player->y) 
-			{
-				printf("%s", player->shape); 
-			}
-			else {
-				printf("%c", map[i][j] == '1' ? '#' : ' '); 
-			}
-		}
-		printf("\n");
-	}
-}
-
-	
-
-
-void Keyboard(Player* player)
-{
-	if (_kbhit())
-	{
-		char key = _getch();
-
-		if (key == -32 || key == 0) 
-		{
-			key = _getch();
-		}
-
-		int newX = player->x, newY = player->y;
-
-		switch (key)
-		{
-		case UP: newY--; break;
-		case DOWN: newY++; break;
-		case LEFT: newX--; break;
-		case RIGHT: newX++; break;
-		}
-
-		if (maze[newY][newX] == '0')
-		{
-			player->x = newX;
-			player->y = newY;
-		}
-	}
-}
 
 int main() 
 {
-	Player player = { 4, 1, "P" };
 
-	CreateMaze();
 
-	while (1)
-	{
-		Render(maze, &player); 
-		Keyboard(&player);
-		Sleep(100);
-	}
+
+
 
 	return 0;
 }
 
 
-
-
-//int main()
-//{
-//	Student student;
-//
-//	student.name;
-//
-//	// 첫 번쨰 매개변수
-//	// 복사받을 문자 배열을 넣어줍니다.
-//
-//	// 두 번째 매개변수
-//	// 복사시킬 문자열을 넣어줍니다.
-//	strcpy(student.name, "KTM");
-//
-//	printf("student.name의 값 : %s\n", student.name);
-//
-//	strcpy(student.name, "G");
-//
-//	printf("student.name의 값 : %s\n", student.name);
-//
-//	return 0;
-//}
 
 	
 
